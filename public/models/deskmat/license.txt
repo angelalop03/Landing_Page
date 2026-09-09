@@ -1,0 +1,11 @@
+Model Information:
+* title:	(Free) Logitech Deskmat Pink
+* source:	https://sketchfab.com/3d-models/free-logitech-deskmat-pink-58e345d73ce743bf865c98f3ecf494a7
+* author:	PolyDavid (https://sketchfab.com/PolyDavid)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "(Free) Logitech Deskmat Pink" (https://sketchfab.com/3d-models/free-logitech-deskmat-pink-58e345d73ce743bf865c98f3ecf494a7) by PolyDavid (https://sketchfab.com/PolyDavid) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

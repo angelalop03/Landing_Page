@@ -1,0 +1,8 @@
+Model Information:
+* title:	simple computer mouse
+* source:	https://sketchfab.com/3d-models/simple-computer-mouse-d52fbafa62d745fdbab1c3edc9432dc9
+* author:	pos4770 (https://sketchfab.com/pos4770)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works

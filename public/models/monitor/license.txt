@@ -1,0 +1,11 @@
+Model Information:
+* title:	Monitor(Low-Poly)
+* source:	https://sketchfab.com/3d-models/monitorlow-poly-7fde05c9dade4ffc855db8355053dd37
+* author:	pevofficialll (https://sketchfab.com/pevofficialll)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Monitor(Low-Poly)" (https://sketchfab.com/3d-models/monitorlow-poly-7fde05c9dade4ffc855db8355053dd37) by pevofficialll (https://sketchfab.com/pevofficialll) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
