@@ -25,6 +25,10 @@ const CONTENT: Record<Exclude<SectionId, null>, { title: string; body: string }>
     title: 'Notas',
     body: 'Has hecho click en los cuadernos. Aquí puede ir un blog, apuntes o notas personales.',
   },
+  phone: {
+    title: 'Móvil',
+    body: 'Has hecho click en el móvil. Aquí pueden ir tus redes sociales o formas de contacto.',
+  },
 }
 
 function App() {

@@ -56,4 +56,18 @@ export const CREDITS: Credit[] = [
     sourceUrl: 'https://sketchfab.com/3d-models/copybook-colored-702a141bdb6444e59a10794fe0ab8c27',
     license: 'CC-BY-4.0',
   },
+  {
+    title: 'Cork Board',
+    author: 'Spacesea',
+    authorUrl: 'https://sketchfab.com/-Spacesea-',
+    sourceUrl: 'https://sketchfab.com/3d-models/cork-board-0952d9cfd8294ef8bcbcb6af1848f0ad',
+    license: 'CC-BY-4.0',
+  },
+  {
+    title: 'Iphone 11',
+    author: 'atomle',
+    authorUrl: 'https://sketchfab.com/atomle',
+    sourceUrl: 'https://sketchfab.com/3d-models/iphone-11-558b8e99bbd4483b9bb2182d8dc72de2',
+    license: 'CC-BY-4.0',
+  },
 ]

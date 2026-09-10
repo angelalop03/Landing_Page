@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Model from './Model'
 
-export type SectionId = 'about' | 'projects' | 'contact' | 'music' | 'notes' | null
+export type SectionId = 'about' | 'projects' | 'contact' | 'music' | 'notes' | 'phone' | null
 
 const DESK_TOP_Y = -0.71
 // Real (post-load) bounding box is ~2 wide x 0.86 tall x 0.9 deep scene units
@@ -85,12 +85,20 @@ function Mouse() {
   return <Model url="/models/mouse/scene.gltf" scale={2.3} />
 }
 
+function Phone() {
+  return <Model url="/models/iphone/scene.gltf" scale={1.46} rotation={LYING_ROTATION} />
+}
+
 function Mug() {
-  return <Model url="/models/coffee-cup/scene.gltf" scale={1} />
+  return <Model url="/models/coffee-cup/scene.gltf" scale={1.4} />
 }
 
 function Notebooks() {
   return <Model url="/models/notebooks/scene.gltf" scale={0.6} />
+}
+
+function CorkBoard() {
+  return <Model url="/models/corkboard/scene.gltf" scale={0.45} />
 }
 
 function Deskmat() {
@@ -127,6 +135,11 @@ export default function DeskSetup({ onSelect }: DeskSetupProps) {
   return (
     <group>
       <Desk />
+
+      {/* decorative, non-interactive prop — hangs on the "wall" behind the monitor */}
+      <group position={[0, DESK_TOP_Y + 0.55, -0.9]}>
+        <CorkBoard />
+      </group>
 
       {/* decorative, non-interactive prop */}
       <group position={[0, DESK_TOP_Y, 0.3]}>
@@ -191,6 +204,17 @@ export default function DeskSetup({ onSelect }: DeskSetupProps) {
         onSelect={onSelect}
       >
         <Notebooks />
+      </Hotspot>
+
+      <Hotspot
+        position={[0.9, DESK_TOP_Y, 0.4]}
+        color={hovered === 'phone' ? '#a7f3d0' : '#111116'}
+        id="phone"
+        hovered={hovered}
+        onHover={setHovered}
+        onSelect={onSelect}
+      >
+        <Phone />
       </Hotspot>
     </group>
   )
