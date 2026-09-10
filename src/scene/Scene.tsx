@@ -35,7 +35,7 @@ const MONITOR_CAMERA_TARGET: [number, number, number] = [MONITOR_POSITION[0], DE
 const MONITOR_CAMERA_POSITION: [number, number, number] = [
   MONITOR_POSITION[0],
   DESK_TOP_Y + 0.55,
-  MONITOR_POSITION[2] + 1.6,
+  MONITOR_POSITION[2] + 1.72,
 ]
 
 export default function Scene({ selected, onSelect }: SceneProps) {

@@ -53,7 +53,7 @@ const DIPLOMAS: DiplomaConfig[] = [
   },
   {
     id: 'cambridge',
-    position: [-0.3, 0.74, 0.05],
+    position: [-0.48, 0.74, 0.05],
     rotationDeg: 5,
     color: '#fdf3d0',
     title: 'Cambridge English B2',
@@ -69,6 +69,16 @@ const DIPLOMAS: DiplomaConfig[] = [
     subtitle: 'Udemy',
     years: 'Junio 2026',
     description: 'Fundamentos de diseño UI/UX y prototipado de interfaces con Figma.',
+  },
+  {
+    id: 'vibecoding',
+    position: [0, 0.62, 0.06],
+    rotationDeg: 4,
+    color: '#dbe9fe',
+    title: 'Vibe Coding Práctico: Desarrollo de Apps con IA desde Cero',
+    subtitle: 'Udemy · Digital Life Academy',
+    years: 'Septiembre 2026',
+    description: 'Curso práctico de desarrollo de aplicaciones con inteligencia artificial ("vibe coding"), impartido por Gustavo Escobar Henríquez.',
   },
 ]
 

@@ -141,7 +141,7 @@ export default function MonitorScreen({ onClose }: MonitorScreenProps) {
             ref={listRef}
             onWheel={(e) => e.stopPropagation()}
             style={{
-              maxHeight: '260px',
+              maxHeight: '300px',
               overflowY: 'auto',
               padding: '10px',
               display: 'flex',
