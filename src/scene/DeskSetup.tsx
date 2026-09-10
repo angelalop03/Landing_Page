@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import Model from './Model'
 import Diplomas from './Diplomas'
+import PhoneScreen from './PhoneScreen'
 
 export type SectionId = 'about' | 'projects' | 'contact' | 'music' | 'notes' | 'phone' | null
 
-const DESK_TOP_Y = -0.71
+export const DESK_TOP_Y = -0.71
+export const PHONE_POSITION: [number, number, number] = [0.9, DESK_TOP_Y, 0.4]
 // Real (post-load) bounding box is ~2 wide x 0.86 tall x 0.9 deep scene units
 // — the glTF's declared accessor min/max metadata is stale/wrong, so this was
 // measured from the loaded geometry itself rather than trusted from the file.
@@ -118,6 +120,7 @@ function Desk() {
 }
 
 interface DeskSetupProps {
+  selected: SectionId
   onSelect: (id: SectionId) => void
 }
 
@@ -130,7 +133,7 @@ interface DeskSetupProps {
  * 3. Swap the placeholder mesh below for <Model url="/models/your-model.glb" />
  *    (see src/scene/Model.tsx) inside the matching <Hotspot>.
  */
-export default function DeskSetup({ onSelect }: DeskSetupProps) {
+export default function DeskSetup({ selected, onSelect }: DeskSetupProps) {
   const [hovered, setHovered] = useState<SectionId>(null)
 
   return (
@@ -209,7 +212,7 @@ export default function DeskSetup({ onSelect }: DeskSetupProps) {
       </Hotspot>
 
       <Hotspot
-        position={[0.9, DESK_TOP_Y, 0.4]}
+        position={PHONE_POSITION}
         color={hovered === 'phone' ? '#a7f3d0' : '#111116'}
         id="phone"
         hovered={hovered}
@@ -217,6 +220,7 @@ export default function DeskSetup({ onSelect }: DeskSetupProps) {
         onSelect={onSelect}
       >
         <Phone />
+        {selected === 'phone' && <PhoneScreen onClose={() => onSelect(null)} />}
       </Hotspot>
     </group>
   )

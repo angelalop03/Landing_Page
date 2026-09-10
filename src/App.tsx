@@ -4,7 +4,7 @@ import type { SectionId } from './scene/DeskSetup'
 import { CREDITS } from './credits'
 import './App.css'
 
-const CONTENT: Record<Exclude<SectionId, null>, { title: string; body: string }> = {
+const CONTENT: Record<Exclude<SectionId, null | 'phone'>, { title: string; body: string }> = {
   projects: {
     title: 'Proyectos',
     body: 'Has hecho click en el monitor. Aquí va la lista/galería de proyectos.',
@@ -25,10 +25,6 @@ const CONTENT: Record<Exclude<SectionId, null>, { title: string; body: string }>
     title: 'Notas',
     body: 'Has hecho click en los cuadernos. Aquí puede ir un blog, apuntes o notas personales.',
   },
-  phone: {
-    title: 'Móvil',
-    body: 'Has hecho click en el móvil. Aquí pueden ir tus redes sociales o formas de contacto.',
-  },
 }
 
 function App() {
@@ -37,11 +33,11 @@ function App() {
 
   return (
     <div className="app">
-      <Scene onSelect={setSelected} />
+      <Scene selected={selected} onSelect={setSelected} />
 
       <div className="hint">Arrastra para girar la vista · haz click en un objeto del escritorio</div>
 
-      {selected && (
+      {selected && selected !== 'phone' && (
         <div className="panel">
           <button className="close" onClick={() => setSelected(null)} aria-label="Cerrar">
             ✕

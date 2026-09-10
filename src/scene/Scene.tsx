@@ -1,18 +1,37 @@
-import { Suspense } from 'react'
+import { Suspense, useRef } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, ContactShadows, Environment, Lightformer } from '@react-three/drei'
-import DeskSetup, { type SectionId } from './DeskSetup'
+import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib'
+import DeskSetup, { PHONE_POSITION, DESK_TOP_Y, type SectionId } from './DeskSetup'
+import CameraRig from './CameraRig'
 
 interface SceneProps {
+  selected: SectionId
   onSelect: (id: SectionId) => void
 }
 
-export default function Scene({ onSelect }: SceneProps) {
+const DEFAULT_CAMERA_POSITION: [number, number, number] = [0, 0.6, 3.2]
+const DEFAULT_CAMERA_TARGET: [number, number, number] = [0, -0.1, 0]
+
+// Near-top-down so the (flat, screen-up) phone reads like looking straight at
+// it rather than at a steep angle — text on a tilted plane renders visibly
+// distorted/soft under a 3D perspective transform, independent of resolution.
+const PHONE_CAMERA_POSITION: [number, number, number] = [
+  PHONE_POSITION[0] + 0.02,
+  PHONE_POSITION[1] + 0.7,
+  PHONE_POSITION[2] + 0.1,
+]
+const PHONE_CAMERA_TARGET: [number, number, number] = [PHONE_POSITION[0], DESK_TOP_Y + 0.03, PHONE_POSITION[2]]
+
+export default function Scene({ selected, onSelect }: SceneProps) {
+  const controlsRef = useRef<OrbitControlsImpl>(null)
+  const focused = selected === 'phone'
+
   return (
     <Canvas
       shadows
       gl={{ alpha: true }}
-      camera={{ position: [0, 0.6, 3.2], fov: 45 }}
+      camera={{ position: DEFAULT_CAMERA_POSITION, fov: 45 }}
       style={{ position: 'absolute', inset: 0 }}
     >
       <ambientLight intensity={0.5} />
@@ -20,7 +39,7 @@ export default function Scene({ onSelect }: SceneProps) {
       <pointLight position={[-2, 1, -1]} intensity={0.6} color="#7dd3fc" />
 
       <Suspense fallback={null}>
-        <DeskSetup onSelect={onSelect} />
+        <DeskSetup selected={selected} onSelect={onSelect} />
         <ContactShadows position={[0, -0.95, 0]} opacity={0.5} scale={6} blur={2.5} far={2} />
 
         {/* Synthetic (locally-rendered) environment so PBR materials get proper
@@ -33,12 +52,23 @@ export default function Scene({ onSelect }: SceneProps) {
         </Environment>
       </Suspense>
 
+      <CameraRig
+        focused={focused}
+        controlsRef={controlsRef}
+        focusPosition={PHONE_CAMERA_POSITION}
+        focusTarget={PHONE_CAMERA_TARGET}
+        defaultPosition={DEFAULT_CAMERA_POSITION}
+        defaultTarget={DEFAULT_CAMERA_TARGET}
+      />
+
       <OrbitControls
+        ref={controlsRef}
+        enabled={!focused}
         enablePan={false}
-        minDistance={1.8}
+        minDistance={focused ? 0.15 : 1.8}
         maxDistance={5}
         maxPolarAngle={Math.PI / 1.9}
-        target={[0, -0.1, 0]}
+        target={DEFAULT_CAMERA_TARGET}
       />
     </Canvas>
   )
