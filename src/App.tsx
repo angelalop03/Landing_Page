@@ -30,12 +30,33 @@ const CONTENT: Record<Exclude<SectionId, null | 'phone'>, { title: string; body:
 function App() {
   const [selected, setSelected] = useState<SectionId>(null)
   const [showCredits, setShowCredits] = useState(false)
+  const [showIntro, setShowIntro] = useState(true)
 
   return (
     <div className="app">
       <Scene selected={selected} onSelect={setSelected} />
 
+      <div className="brand">
+        Ángela López <span>· Portfolio</span>
+      </div>
+
       <div className="hint">Arrastra para girar la vista · haz click en un objeto del escritorio</div>
+
+      {showIntro && (
+        <div className="intro-overlay">
+          <div className="intro-card">
+            <h2>¡Bienvenida a mi escritorio! 👋</h2>
+            <p>
+              Esto es un escritorio 3D interactivo. Arrastra con el ratón para girar la
+              vista, y haz click en los objetos — el monitor, el teclado, el ratón, los
+              cascos, el móvil, los cuadernos o el corcho — para descubrir más sobre mí.
+            </p>
+            <button className="intro-start" onClick={() => setShowIntro(false)}>
+              Empezar a explorar
+            </button>
+          </div>
+        </div>
+      )}
 
       {selected && selected !== 'phone' && (
         <div className="panel">

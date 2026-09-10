@@ -23,7 +23,10 @@ interface CameraRigProps {
 export default function CameraRig({ focused, controlsRef, focusPosition, focusTarget, defaultPosition, defaultTarget }: CameraRigProps) {
   const { camera } = useThree()
   const prevFocused = useRef(focused)
-  const animating = useRef(focused)
+  // Start true unconditionally (not just `focused`) so the very first mount
+  // also animates — from wherever the Canvas's initial camera pose is — into
+  // the default view, giving the app a small "swooping in" entrance.
+  const animating = useRef(true)
 
   if (prevFocused.current !== focused) {
     prevFocused.current = focused

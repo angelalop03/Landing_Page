@@ -13,6 +13,10 @@ interface SceneProps {
 const DEFAULT_CAMERA_POSITION: [number, number, number] = [0, 0.6, 3.2]
 const DEFAULT_CAMERA_TARGET: [number, number, number] = [0, -0.1, 0]
 
+// Where the camera starts on mount — CameraRig always animates toward the
+// default pose from here, giving the page a small "swooping in" entrance.
+const INTRO_CAMERA_POSITION: [number, number, number] = [0, 2.1, 6.2]
+
 // Near-top-down so the (flat, screen-up) phone reads like looking straight at
 // it rather than at a steep angle — text on a tilted plane renders visibly
 // distorted/soft under a 3D perspective transform, independent of resolution.
@@ -31,7 +35,7 @@ export default function Scene({ selected, onSelect }: SceneProps) {
     <Canvas
       shadows
       gl={{ alpha: true }}
-      camera={{ position: DEFAULT_CAMERA_POSITION, fov: 45 }}
+      camera={{ position: INTRO_CAMERA_POSITION, fov: 45 }}
       style={{ position: 'absolute', inset: 0 }}
     >
       <ambientLight intensity={0.5} />
