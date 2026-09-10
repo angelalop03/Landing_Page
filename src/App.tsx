@@ -4,11 +4,7 @@ import type { SectionId } from './scene/DeskSetup'
 import { CREDITS } from './credits'
 import './App.css'
 
-const CONTENT: Record<Exclude<SectionId, null | 'phone'>, { title: string; body: string }> = {
-  projects: {
-    title: 'Proyectos',
-    body: 'Has hecho click en el monitor. Aquí va la lista/galería de proyectos.',
-  },
+const CONTENT: Record<Exclude<SectionId, null | 'phone' | 'projects'>, { title: string; body: string }> = {
   about: {
     title: 'Sobre mí',
     body: 'Has hecho click en el teclado. Aquí va tu bio y stack técnico.',
@@ -58,7 +54,7 @@ function App() {
         </div>
       )}
 
-      {selected && selected !== 'phone' && (
+      {selected && selected !== 'phone' && selected !== 'projects' && (
         <div className="panel">
           <button className="close" onClick={() => setSelected(null)} aria-label="Cerrar">
             ✕

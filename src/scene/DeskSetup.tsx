@@ -2,11 +2,13 @@ import { useState } from 'react'
 import Model from './Model'
 import Diplomas from './Diplomas'
 import PhoneScreen from './PhoneScreen'
+import MonitorScreen from './MonitorScreen'
 
 export type SectionId = 'about' | 'projects' | 'contact' | 'music' | 'notes' | 'phone' | null
 
 export const DESK_TOP_Y = -0.71
 export const PHONE_POSITION: [number, number, number] = [0.9, DESK_TOP_Y, 0.4]
+export const MONITOR_POSITION: [number, number, number] = [0, DESK_TOP_Y, -0.4]
 // Real (post-load) bounding box is ~2 wide x 0.86 tall x 0.9 deep scene units
 // — the glTF's declared accessor min/max metadata is stale/wrong, so this was
 // measured from the loaded geometry itself rather than trusted from the file.
@@ -35,6 +37,8 @@ interface HotspotProps {
   hovered: SectionId
   onHover: (id: SectionId) => void
   onSelect: (id: SectionId) => void
+  /** While true, hover no longer scales the group up — used once this hotspot's own panel/screen is open, so hovering over it doesn't grow the open content. */
+  suppressHoverScale?: boolean
   children: React.ReactNode
 }
 
@@ -43,8 +47,8 @@ interface HotspotProps {
  * Swap the `children` primitive for a loaded Sketchfab <Model url="..." />
  * and keep this wrapper for the interactivity.
  */
-function Hotspot({ position, color, id, hovered, onHover, onSelect, children }: HotspotProps) {
-  const isHovered = hovered === id
+function Hotspot({ position, color, id, hovered, onHover, onSelect, suppressHoverScale, children }: HotspotProps) {
+  const isHovered = hovered === id && !suppressHoverScale
 
   return (
     <group
@@ -152,14 +156,16 @@ export default function DeskSetup({ selected, onSelect }: DeskSetupProps) {
       </group>
 
       <Hotspot
-        position={[0, DESK_TOP_Y, -0.4]}
+        position={MONITOR_POSITION}
         color={hovered === 'projects' ? '#7dd3fc' : '#111116'}
         id="projects"
         hovered={hovered}
         onHover={setHovered}
         onSelect={onSelect}
+        suppressHoverScale={selected === 'projects'}
       >
         <Monitor />
+        {selected === 'projects' && <MonitorScreen onClose={() => onSelect(null)} />}
       </Hotspot>
 
       <Hotspot
@@ -218,6 +224,7 @@ export default function DeskSetup({ selected, onSelect }: DeskSetupProps) {
         hovered={hovered}
         onHover={setHovered}
         onSelect={onSelect}
+        suppressHoverScale={selected === 'phone'}
       >
         <Phone />
         {selected === 'phone' && <PhoneScreen onClose={() => onSelect(null)} />}

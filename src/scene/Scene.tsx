@@ -2,7 +2,7 @@ import { Suspense, useRef } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, ContactShadows, Environment, Lightformer } from '@react-three/drei'
 import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib'
-import DeskSetup, { PHONE_POSITION, DESK_TOP_Y, type SectionId } from './DeskSetup'
+import DeskSetup, { PHONE_POSITION, MONITOR_POSITION, DESK_TOP_Y, type SectionId } from './DeskSetup'
 import CameraRig from './CameraRig'
 
 interface SceneProps {
@@ -27,9 +27,23 @@ const PHONE_CAMERA_POSITION: [number, number, number] = [
 ]
 const PHONE_CAMERA_TARGET: [number, number, number] = [PHONE_POSITION[0], DESK_TOP_Y + 0.03, PHONE_POSITION[2]]
 
+// The monitor's screen already stands vertical, facing the camera — approach
+// it head-on (same X/Y for camera and target, only Z differs) so the "window"
+// reads straight-on instead of at a tilt, avoiding the same blur we saw when
+// the phone's card was viewed at an angle.
+const MONITOR_CAMERA_TARGET: [number, number, number] = [MONITOR_POSITION[0], DESK_TOP_Y + 0.55, MONITOR_POSITION[2]]
+const MONITOR_CAMERA_POSITION: [number, number, number] = [
+  MONITOR_POSITION[0],
+  DESK_TOP_Y + 0.55,
+  MONITOR_POSITION[2] + 1.6,
+]
+
 export default function Scene({ selected, onSelect }: SceneProps) {
   const controlsRef = useRef<OrbitControlsImpl>(null)
-  const focused = selected === 'phone'
+
+  const focusKey = selected === 'phone' || selected === 'projects' ? selected : null
+  const focusPosition = selected === 'phone' ? PHONE_CAMERA_POSITION : MONITOR_CAMERA_POSITION
+  const focusTarget = selected === 'phone' ? PHONE_CAMERA_TARGET : MONITOR_CAMERA_TARGET
 
   return (
     <Canvas
@@ -57,19 +71,19 @@ export default function Scene({ selected, onSelect }: SceneProps) {
       </Suspense>
 
       <CameraRig
-        focused={focused}
+        focusKey={focusKey}
         controlsRef={controlsRef}
-        focusPosition={PHONE_CAMERA_POSITION}
-        focusTarget={PHONE_CAMERA_TARGET}
+        focusPosition={focusPosition}
+        focusTarget={focusTarget}
         defaultPosition={DEFAULT_CAMERA_POSITION}
         defaultTarget={DEFAULT_CAMERA_TARGET}
       />
 
       <OrbitControls
         ref={controlsRef}
-        enabled={!focused}
+        enabled={focusKey === null}
         enablePan={false}
-        minDistance={focused ? 0.15 : 1.8}
+        minDistance={focusKey !== null ? 0.15 : 1.8}
         maxDistance={5}
         maxPolarAngle={Math.PI / 1.9}
         target={DEFAULT_CAMERA_TARGET}
