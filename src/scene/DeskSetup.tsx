@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Model from './Model'
+import Diplomas from './Diplomas'
 
 export type SectionId = 'about' | 'projects' | 'contact' | 'music' | 'notes' | 'phone' | null
 
@@ -139,6 +140,7 @@ export default function DeskSetup({ onSelect }: DeskSetupProps) {
       {/* decorative, non-interactive prop — hangs on the "wall" behind the monitor */}
       <group position={[0, DESK_TOP_Y + 0.55, -0.9]}>
         <CorkBoard />
+        <Diplomas />
       </group>
 
       {/* decorative, non-interactive prop */}
