@@ -2,7 +2,7 @@ import { Suspense, useRef } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, ContactShadows, Environment, Lightformer } from '@react-three/drei'
 import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib'
-import DeskSetup, { PHONE_POSITION, MONITOR_POSITION, DESK_TOP_Y, type SectionId } from './DeskSetup'
+import DeskSetup, { PHONE_POSITION, MONITOR_POSITION, HEADPHONES_POSITION, DESK_TOP_Y, type SectionId } from './DeskSetup'
 import CameraRig from './CameraRig'
 
 interface SceneProps {
@@ -38,12 +38,29 @@ const MONITOR_CAMERA_POSITION: [number, number, number] = [
   MONITOR_POSITION[2] + 1.72,
 ]
 
+// The music player pops up off the headphones facing the camera (same
+// reasoning as the monitor) — the Spotify embed has its own real controls,
+// so it needs to read straight-on rather than on a raking plane.
+const MUSIC_CAMERA_TARGET: [number, number, number] = [HEADPHONES_POSITION[0], DESK_TOP_Y + 0.58, HEADPHONES_POSITION[2]]
+const MUSIC_CAMERA_POSITION: [number, number, number] = [
+  HEADPHONES_POSITION[0],
+  DESK_TOP_Y + 0.58,
+  HEADPHONES_POSITION[2] + 1.7,
+]
+
+const FOCUS_CAMERA: Record<'phone' | 'projects' | 'music', { position: [number, number, number]; target: [number, number, number] }> = {
+  phone: { position: PHONE_CAMERA_POSITION, target: PHONE_CAMERA_TARGET },
+  projects: { position: MONITOR_CAMERA_POSITION, target: MONITOR_CAMERA_TARGET },
+  music: { position: MUSIC_CAMERA_POSITION, target: MUSIC_CAMERA_TARGET },
+}
+
 export default function Scene({ selected, onSelect }: SceneProps) {
   const controlsRef = useRef<OrbitControlsImpl>(null)
 
-  const focusKey = selected === 'phone' || selected === 'projects' ? selected : null
-  const focusPosition = selected === 'phone' ? PHONE_CAMERA_POSITION : MONITOR_CAMERA_POSITION
-  const focusTarget = selected === 'phone' ? PHONE_CAMERA_TARGET : MONITOR_CAMERA_TARGET
+  const focusKey = selected === 'phone' || selected === 'projects' || selected === 'music' ? selected : null
+  const focus = focusKey ? FOCUS_CAMERA[focusKey] : null
+  const focusPosition = focus ? focus.position : DEFAULT_CAMERA_POSITION
+  const focusTarget = focus ? focus.target : DEFAULT_CAMERA_TARGET
 
   return (
     <Canvas

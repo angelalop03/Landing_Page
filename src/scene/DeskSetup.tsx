@@ -3,12 +3,14 @@ import Model from './Model'
 import Diplomas from './Diplomas'
 import PhoneScreen from './PhoneScreen'
 import MonitorScreen from './MonitorScreen'
+import MusicPlayer from './MusicPlayer'
 
 export type SectionId = 'about' | 'projects' | 'contact' | 'music' | 'notes' | 'phone' | null
 
 export const DESK_TOP_Y = -0.71
 export const PHONE_POSITION: [number, number, number] = [0.9, DESK_TOP_Y, 0.4]
 export const MONITOR_POSITION: [number, number, number] = [0, DESK_TOP_Y, -0.4]
+export const HEADPHONES_POSITION: [number, number, number] = [1.15, DESK_TOP_Y, -0.05]
 // Real (post-load) bounding box is ~2 wide x 0.86 tall x 0.9 deep scene units
 // — the glTF's declared accessor min/max metadata is stale/wrong, so this was
 // measured from the loaded geometry itself rather than trusted from the file.
@@ -196,14 +198,16 @@ export default function DeskSetup({ selected, onSelect }: DeskSetupProps) {
       </group>
 
       <Hotspot
-        position={[1.15, DESK_TOP_Y, -0.05]}
+        position={HEADPHONES_POSITION}
         color={hovered === 'music' ? '#fbcfe8' : '#2a2a2a'}
         id="music"
         hovered={hovered}
         onHover={setHovered}
         onSelect={onSelect}
+        suppressHoverScale={selected === 'music'}
       >
         <Headphones />
+        <MusicPlayer visible={selected === 'music'} onClose={() => onSelect(null)} />
       </Hotspot>
 
       <Hotspot
