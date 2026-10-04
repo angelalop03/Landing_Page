@@ -4,6 +4,7 @@ import Diplomas from './Diplomas'
 import PhoneScreen from './PhoneScreen'
 import MonitorScreen from './MonitorScreen'
 import MusicPlayer from './MusicPlayer'
+import NotebookScreen from './NotebookScreen'
 
 export type SectionId = 'about' | 'projects' | 'contact' | 'music' | 'notes' | 'phone' | null
 
@@ -23,6 +24,8 @@ const DESK_FLOOR_Y = DESK_TOP_Y - DESK_MODEL_HEIGHT
 // exactly coplanar with the mat's top and z-fight (flicker on top of it),
 // which becomes very visible the instant either one's hover-scale nudges it.
 const MAT_THICKNESS = 0.17573 * 0.076
+
+export const NOTES_POSITION: [number, number, number] = [-0.82, DESK_TOP_Y + MAT_THICKNESS, 0.4]
 
 // Rotation arrays passed to <Model> must be stable references: Model's
 // ground-offset calculation depends on `rotation` and mutates the loaded
@@ -103,7 +106,7 @@ function Mug() {
 }
 
 function Notebooks() {
-  return <Model url="/models/notebooks/scene.gltf" scale={0.6} />
+  return <Model url="/models/notebook/scene.gltf" scale={0.14} />
 }
 
 function CorkBoard() {
@@ -211,14 +214,16 @@ export default function DeskSetup({ selected, onSelect }: DeskSetupProps) {
       </Hotspot>
 
       <Hotspot
-        position={[-0.68, DESK_TOP_Y, 0.4]}
+        position={NOTES_POSITION}
         color={hovered === 'notes' ? '#fde68a' : '#3a3a3a'}
         id="notes"
         hovered={hovered}
         onHover={setHovered}
         onSelect={onSelect}
+        suppressHoverScale={selected === 'notes'}
       >
         <Notebooks />
+        {selected === 'notes' && <NotebookScreen onClose={() => onSelect(null)} />}
       </Hotspot>
 
       <Hotspot

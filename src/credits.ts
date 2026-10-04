@@ -50,10 +50,10 @@ export const CREDITS: Credit[] = [
     license: 'CC-BY-4.0',
   },
   {
-    title: 'Copybook (colored)',
-    author: 'Fridge',
-    authorUrl: 'https://sketchfab.com/youssefdarwish01',
-    sourceUrl: 'https://sketchfab.com/3d-models/copybook-colored-702a141bdb6444e59a10794fe0ab8c27',
+    title: 'Notebook',
+    author: 'demagdev',
+    authorUrl: 'https://sketchfab.com/demagdev',
+    sourceUrl: 'https://sketchfab.com/3d-models/notebook-b58d334fb340449589e1efb9dc3e6119',
     license: 'CC-BY-4.0',
   },
   {
