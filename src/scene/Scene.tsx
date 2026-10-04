@@ -7,6 +7,7 @@ import DeskSetup, {
   MONITOR_POSITION,
   HEADPHONES_POSITION,
   NOTES_POSITION,
+  PHOTO_FRAME_POSITION,
   DESK_TOP_Y,
   type SectionId,
 } from './DeskSetup'
@@ -66,21 +67,37 @@ const NOTES_CAMERA_POSITION: [number, number, number] = [
 ]
 const NOTES_CAMERA_TARGET: [number, number, number] = [NOTES_POSITION[0], DESK_TOP_Y + 0.16, NOTES_POSITION[2]]
 
+// The frame stands upright facing the camera already — approach it head-on
+// (same X/Y, only Z differs) like the monitor and music player.
+const PHOTO_CAMERA_TARGET: [number, number, number] = [
+  PHOTO_FRAME_POSITION[0],
+  DESK_TOP_Y + 0.3,
+  PHOTO_FRAME_POSITION[2],
+]
+const PHOTO_CAMERA_POSITION: [number, number, number] = [
+  PHOTO_FRAME_POSITION[0] + 0.12,
+  DESK_TOP_Y + 0.3,
+  PHOTO_FRAME_POSITION[2] + 1.05,
+]
+
 const FOCUS_CAMERA: Record<
-  'phone' | 'projects' | 'music' | 'notes',
+  'phone' | 'projects' | 'music' | 'notes' | 'photo',
   { position: [number, number, number]; target: [number, number, number] }
 > = {
   phone: { position: PHONE_CAMERA_POSITION, target: PHONE_CAMERA_TARGET },
   projects: { position: MONITOR_CAMERA_POSITION, target: MONITOR_CAMERA_TARGET },
   music: { position: MUSIC_CAMERA_POSITION, target: MUSIC_CAMERA_TARGET },
   notes: { position: NOTES_CAMERA_POSITION, target: NOTES_CAMERA_TARGET },
+  photo: { position: PHOTO_CAMERA_POSITION, target: PHOTO_CAMERA_TARGET },
 }
 
 export default function Scene({ selected, onSelect }: SceneProps) {
   const controlsRef = useRef<OrbitControlsImpl>(null)
 
   const focusKey =
-    selected === 'phone' || selected === 'projects' || selected === 'music' || selected === 'notes' ? selected : null
+    selected === 'phone' || selected === 'projects' || selected === 'music' || selected === 'notes' || selected === 'photo'
+      ? selected
+      : null
   const focus = focusKey ? FOCUS_CAMERA[focusKey] : null
   const focusPosition = focus ? focus.position : DEFAULT_CAMERA_POSITION
   const focusTarget = focus ? focus.target : DEFAULT_CAMERA_TARGET

@@ -5,13 +5,15 @@ import PhoneScreen from './PhoneScreen'
 import MonitorScreen from './MonitorScreen'
 import MusicPlayer from './MusicPlayer'
 import NotebookScreen from './NotebookScreen'
+import PhotoFrameScreen from './PhotoFrameScreen'
 
-export type SectionId = 'about' | 'projects' | 'contact' | 'music' | 'notes' | 'phone' | null
+export type SectionId = 'about' | 'projects' | 'contact' | 'music' | 'notes' | 'phone' | 'photo' | null
 
 export const DESK_TOP_Y = -0.71
 export const PHONE_POSITION: [number, number, number] = [0.9, DESK_TOP_Y, 0.4]
 export const MONITOR_POSITION: [number, number, number] = [0, DESK_TOP_Y, -0.4]
 export const HEADPHONES_POSITION: [number, number, number] = [1.15, DESK_TOP_Y, -0.05]
+export const PHOTO_FRAME_POSITION: [number, number, number] = [-0.95, DESK_TOP_Y, -0.32]
 // Real (post-load) bounding box is ~2 wide x 0.86 tall x 0.9 deep scene units
 // — the glTF's declared accessor min/max metadata is stale/wrong, so this was
 // measured from the loaded geometry itself rather than trusted from the file.
@@ -109,6 +111,12 @@ function Notebooks() {
   return <Model url="/models/notebook/scene.gltf" scale={0.14} />
 }
 
+const PHOTO_FRAME_ROTATION: [number, number, number] = [0, 0.35, 0]
+
+function PhotoFrame() {
+  return <Model url="/models/photo-frame/scene.gltf" scale={0.72} rotation={PHOTO_FRAME_ROTATION} />
+}
+
 function CorkBoard() {
   return <Model url="/models/corkboard/scene.gltf" scale={0.45} />
 }
@@ -199,6 +207,19 @@ export default function DeskSetup({ selected, onSelect }: DeskSetupProps) {
       <group position={[-1.1, DESK_TOP_Y, -0.05]}>
         <Mug />
       </group>
+
+      <Hotspot
+        position={PHOTO_FRAME_POSITION}
+        color={hovered === 'photo' ? '#fcd9a0' : '#2a2a2a'}
+        id="photo"
+        hovered={hovered}
+        onHover={setHovered}
+        onSelect={onSelect}
+        suppressHoverScale={selected === 'photo'}
+      >
+        <PhotoFrame />
+        {selected === 'photo' && <PhotoFrameScreen onClose={() => onSelect(null)} />}
+      </Hotspot>
 
       <Hotspot
         position={HEADPHONES_POSITION}

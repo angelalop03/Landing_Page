@@ -70,4 +70,11 @@ export const CREDITS: Credit[] = [
     sourceUrl: 'https://sketchfab.com/3d-models/iphone-11-558b8e99bbd4483b9bb2182d8dc72de2',
     license: 'CC-BY-4.0',
   },
+  {
+    title: 'Modern Boho Art Photo Frame',
+    author: 'wingstech.3d',
+    authorUrl: 'https://sketchfab.com/wingstech.3d',
+    sourceUrl: 'https://sketchfab.com/3d-models/modern-boho-art-photo-frame-9973a2d604714fc8af571ea90923e1b5',
+    license: 'CC-BY-4.0',
+  },
 ]
