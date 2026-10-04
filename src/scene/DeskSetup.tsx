@@ -111,7 +111,7 @@ function Notebooks() {
   return <Model url="/models/notebook/scene.gltf" scale={0.14} />
 }
 
-const PHOTO_FRAME_ROTATION: [number, number, number] = [0, -Math.PI / 2, 0]
+const PHOTO_FRAME_ROTATION: [number, number, number] = [0, -Math.PI / 2 + 0.3, 0]
 
 function PhotoFrame() {
   return <Model url="/models/white-photo-frame/scene.gltf" scale={0.25} rotation={PHOTO_FRAME_ROTATION} />

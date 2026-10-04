@@ -69,15 +69,17 @@ const NOTES_CAMERA_TARGET: [number, number, number] = [NOTES_POSITION[0], DESK_T
 
 // The frame stands upright facing the camera already — approach it head-on
 // (same X/Y, only Z differs) like the monitor and music player.
+// Shifted toward the card's side (+X) so the frame reads on the left of the
+// view and the "Sobre mí" card (offset further +X) reads on the right.
 const PHOTO_CAMERA_TARGET: [number, number, number] = [
-  PHOTO_FRAME_POSITION[0],
+  PHOTO_FRAME_POSITION[0] + 0.25,
   DESK_TOP_Y + 0.3,
   PHOTO_FRAME_POSITION[2],
 ]
 const PHOTO_CAMERA_POSITION: [number, number, number] = [
-  PHOTO_FRAME_POSITION[0] + 0.12,
+  PHOTO_FRAME_POSITION[0] + 0.37,
   DESK_TOP_Y + 0.3,
-  PHOTO_FRAME_POSITION[2] + 2.2,
+  PHOTO_FRAME_POSITION[2] + 1.1,
 ]
 
 const FOCUS_CAMERA: Record<
