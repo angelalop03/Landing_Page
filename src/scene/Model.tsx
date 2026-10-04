@@ -36,6 +36,17 @@ export default function Model({ url, brightness, rotation, ...props }: ModelProp
     return [-center.x, -box.min.y, -center.z] as [number, number, number]
   }, [scene, rotation])
 
+  // Some compressed/simplified exports (via gltf-transform) ship meshes whose
+  // baked-in bounding sphere no longer matches their actual geometry, which
+  // can make Three.js's frustum culling wrongly decide a mesh is off-screen
+  // and skip drawing it — especially once the camera gets close. These are
+  // small desk props, so the culling savings aren't worth the risk.
+  useEffect(() => {
+    scene.traverse((obj) => {
+      obj.frustumCulled = false
+    })
+  }, [scene])
+
   useEffect(() => {
     if (brightness === undefined) return
     scene.traverse((obj) => {

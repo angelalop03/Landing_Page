@@ -77,7 +77,7 @@ const PHOTO_CAMERA_TARGET: [number, number, number] = [
 const PHOTO_CAMERA_POSITION: [number, number, number] = [
   PHOTO_FRAME_POSITION[0] + 0.12,
   DESK_TOP_Y + 0.3,
-  PHOTO_FRAME_POSITION[2] + 1.05,
+  PHOTO_FRAME_POSITION[2] + 2.2,
 ]
 
 const FOCUS_CAMERA: Record<

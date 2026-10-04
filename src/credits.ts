@@ -71,10 +71,10 @@ export const CREDITS: Credit[] = [
     license: 'CC-BY-4.0',
   },
   {
-    title: 'Modern Boho Art Photo Frame',
-    author: 'wingstech.3d',
-    authorUrl: 'https://sketchfab.com/wingstech.3d',
-    sourceUrl: 'https://sketchfab.com/3d-models/modern-boho-art-photo-frame-9973a2d604714fc8af571ea90923e1b5',
+    title: 'White Photo Frame',
+    author: 'Johana-PS',
+    authorUrl: 'https://sketchfab.com/Johana-PS',
+    sourceUrl: 'https://sketchfab.com/3d-models/white-photo-frame-2b72fcdffd7c445fa68573b2a2c5b940',
     license: 'CC-BY-4.0',
   },
 ]

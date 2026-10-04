@@ -25,6 +25,11 @@ function App() {
 
   return (
     <div className="app">
+      <div className="rotate-prompt">
+        <div className="rotate-prompt-icon">📱</div>
+        <p>Gira tu móvil para ver el portfolio correctamente</p>
+      </div>
+
       <Scene selected={selected} onSelect={setSelected} />
 
       <div className="brand">

@@ -111,10 +111,10 @@ function Notebooks() {
   return <Model url="/models/notebook/scene.gltf" scale={0.14} />
 }
 
-const PHOTO_FRAME_ROTATION: [number, number, number] = [0, 0.35, 0]
+const PHOTO_FRAME_ROTATION: [number, number, number] = [0, -Math.PI / 2, 0]
 
 function PhotoFrame() {
-  return <Model url="/models/photo-frame/scene.gltf" scale={0.72} rotation={PHOTO_FRAME_ROTATION} />
+  return <Model url="/models/white-photo-frame/scene.gltf" scale={0.25} rotation={PHOTO_FRAME_ROTATION} />
 }
 
 function CorkBoard() {

@@ -13,7 +13,7 @@ interface PhotoFrameScreenProps {
  */
 export default function PhotoFrameScreen({ onClose }: PhotoFrameScreenProps) {
   return (
-    <group position={[0.26, 0.3, 0.05]}>
+    <group position={[0.26, 0.3, 0.3]}>
       <Html transform occlude={false} distanceFactor={1} style={{ pointerEvents: 'auto' }}>
         <div
           onClick={(e) => e.stopPropagation()}
