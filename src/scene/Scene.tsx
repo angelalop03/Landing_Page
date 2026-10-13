@@ -72,14 +72,14 @@ const NOTES_CAMERA_TARGET: [number, number, number] = [NOTES_POSITION[0], DESK_T
 // Shifted toward the card's side (+X) so the frame reads on the left of the
 // view and the "Sobre mí" card (offset further +X) reads on the right.
 const PHOTO_CAMERA_TARGET: [number, number, number] = [
-  PHOTO_FRAME_POSITION[0] + 0.25,
+  PHOTO_FRAME_POSITION[0] + 0.09,
   DESK_TOP_Y + 0.3,
   PHOTO_FRAME_POSITION[2],
 ]
 const PHOTO_CAMERA_POSITION: [number, number, number] = [
-  PHOTO_FRAME_POSITION[0] + 0.37,
+  PHOTO_FRAME_POSITION[0] + 0.135,
   DESK_TOP_Y + 0.3,
-  PHOTO_FRAME_POSITION[2] + 1.1,
+  PHOTO_FRAME_POSITION[2] + 1.35,
 ]
 
 const FOCUS_CAMERA: Record<
