@@ -6,8 +6,9 @@ import MonitorScreen from './MonitorScreen'
 import MusicPlayer from './MusicPlayer'
 import NotebookScreen from './NotebookScreen'
 import PhotoFrameScreen from './PhotoFrameScreen'
+import KeyboardScreen from './KeyboardScreen'
 
-export type SectionId = 'about' | 'projects' | 'contact' | 'music' | 'notes' | 'phone' | 'photo' | null
+export type SectionId = 'about' | 'projects' | 'music' | 'notes' | 'phone' | 'photo' | null
 
 export const DESK_TOP_Y = -0.71
 export const PHONE_POSITION: [number, number, number] = [0.9, DESK_TOP_Y, 0.4]
@@ -28,6 +29,7 @@ const DESK_FLOOR_Y = DESK_TOP_Y - DESK_MODEL_HEIGHT
 const MAT_THICKNESS = 0.17573 * 0.076
 
 export const NOTES_POSITION: [number, number, number] = [-0.82, DESK_TOP_Y + MAT_THICKNESS, 0.4]
+export const KEYBOARD_POSITION: [number, number, number] = [0, DESK_TOP_Y + MAT_THICKNESS, 0.3]
 
 // Rotation arrays passed to <Model> must be stable references: Model's
 // ground-offset calculation depends on `rotation` and mutates the loaded
@@ -182,26 +184,22 @@ export default function DeskSetup({ selected, onSelect }: DeskSetupProps) {
       </Hotspot>
 
       <Hotspot
-        position={[0, DESK_TOP_Y + MAT_THICKNESS, 0.3]}
+        position={KEYBOARD_POSITION}
         color={hovered === 'about' ? '#c4b5fd' : '#1c1c22'}
         id="about"
         hovered={hovered}
         onHover={setHovered}
         onSelect={onSelect}
+        suppressHoverScale={selected === 'about'}
       >
         <Keyboard />
+        {selected === 'about' && <KeyboardScreen onClose={() => onSelect(null)} />}
       </Hotspot>
 
-      <Hotspot
-        position={[0.65, DESK_TOP_Y + MAT_THICKNESS, 0.3]}
-        color={hovered === 'contact' ? '#fca5a5' : '#1c1c22'}
-        id="contact"
-        hovered={hovered}
-        onHover={setHovered}
-        onSelect={onSelect}
-      >
+      {/* decorative, non-interactive prop */}
+      <group position={[0.65, DESK_TOP_Y + MAT_THICKNESS, 0.3]}>
         <Mouse />
-      </Hotspot>
+      </group>
 
       {/* decorative, non-interactive prop */}
       <group position={[-1.1, DESK_TOP_Y, -0.05]}>

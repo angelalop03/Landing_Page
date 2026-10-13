@@ -8,6 +8,7 @@ import DeskSetup, {
   HEADPHONES_POSITION,
   NOTES_POSITION,
   PHOTO_FRAME_POSITION,
+  KEYBOARD_POSITION,
   DESK_TOP_Y,
   type SectionId,
 } from './DeskSetup'
@@ -82,8 +83,21 @@ const PHOTO_CAMERA_POSITION: [number, number, number] = [
   PHOTO_FRAME_POSITION[2] + 1.35,
 ]
 
+// The keyboard lies flat like the notebook — near-top-down so the keycap
+// grid reads straight-on instead of at a raking angle.
+const KEYBOARD_CAMERA_POSITION: [number, number, number] = [
+  KEYBOARD_POSITION[0],
+  KEYBOARD_POSITION[1] + 0.82,
+  KEYBOARD_POSITION[2] + 0.072,
+]
+const KEYBOARD_CAMERA_TARGET: [number, number, number] = [
+  KEYBOARD_POSITION[0],
+  DESK_TOP_Y + 0.1,
+  KEYBOARD_POSITION[2],
+]
+
 const FOCUS_CAMERA: Record<
-  'phone' | 'projects' | 'music' | 'notes' | 'photo',
+  'phone' | 'projects' | 'music' | 'notes' | 'photo' | 'about',
   { position: [number, number, number]; target: [number, number, number] }
 > = {
   phone: { position: PHONE_CAMERA_POSITION, target: PHONE_CAMERA_TARGET },
@@ -91,13 +105,19 @@ const FOCUS_CAMERA: Record<
   music: { position: MUSIC_CAMERA_POSITION, target: MUSIC_CAMERA_TARGET },
   notes: { position: NOTES_CAMERA_POSITION, target: NOTES_CAMERA_TARGET },
   photo: { position: PHOTO_CAMERA_POSITION, target: PHOTO_CAMERA_TARGET },
+  about: { position: KEYBOARD_CAMERA_POSITION, target: KEYBOARD_CAMERA_TARGET },
 }
 
 export default function Scene({ selected, onSelect }: SceneProps) {
   const controlsRef = useRef<OrbitControlsImpl>(null)
 
   const focusKey =
-    selected === 'phone' || selected === 'projects' || selected === 'music' || selected === 'notes' || selected === 'photo'
+    selected === 'phone' ||
+    selected === 'projects' ||
+    selected === 'music' ||
+    selected === 'notes' ||
+    selected === 'photo' ||
+    selected === 'about'
       ? selected
       : null
   const focus = focusKey ? FOCUS_CAMERA[focusKey] : null
