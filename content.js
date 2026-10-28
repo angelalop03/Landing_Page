@@ -216,9 +216,9 @@ export const WISHES = {
 
 export const GUIDE = {
   es: {
-    speaker: 'Luna · la gata de la habitación',
+    speaker: 'Aelin · la gata de la habitación',
     intro: [
-      '¡Miau! Soy Luna, la gata de esta habitación (y la que manda aquí, que quede claro).',
+      '¡Miau! Soy Aelin, la gata de esta habitación (y la que manda aquí, que quede claro).',
       'Este es el cuarto de {first}: aquí programa, diseña y sueña de noche. Cada rincón guarda un trocito de su CV.',
       'En el diario está quién es, en el portátil su stack, en el tablón su experiencia, en la estantería su formación y en el móvil cómo contactarla.',
       'Las polaroids de encima de la puerta son sus proyectos, y si abres la puerta llegas a su GitHub.',
@@ -227,9 +227,9 @@ export const GUIDE = {
     allWishes: ['¡Has pedido todos los deseos! El último depende de ti: escríbele a {first} desde el móvil de la mesita 💌'],
   },
   en: {
-    speaker: 'Luna · the room cat',
+    speaker: 'Aelin · the room cat',
     intro: [
-      "Meow! I'm Luna, the cat of this room (and the one in charge, just so you know).",
+      "Meow! I'm Aelin, the cat of this room (and the one in charge, just so you know).",
       "This is {first}'s room: she codes, designs and dreams here at night. Every corner holds a piece of her CV.",
       'The diary tells you who she is, the laptop her stack, the corkboard her experience, the bookshelf her education and the phone how to reach her.',
       'The polaroids above the door are her projects, and opening the door takes you to her GitHub.',
@@ -291,7 +291,7 @@ export const UI = {
     languagesTitle: 'Idiomas',
     contactEyebrow: 'El móvil de la mesita',
     contactTitle: '¿Hablamos?',
-    contactText: 'Si tienes un proyecto, una oferta o simplemente quieres hablar de producto, código o diseño, escríbeme. Contesto rápido (después de dar de comer a Luna).',
+    contactText: 'Si tienes un proyecto, una oferta o simplemente quieres hablar de producto, código o diseño, escríbeme. Contesto rápido (después de dar de comer a Aelin).',
     experienceShort: 'Experiencia',
     email: 'Escríbeme',
     copyEmail: 'Copiar email',
@@ -355,7 +355,7 @@ export const UI = {
     languagesTitle: 'Languages',
     contactEyebrow: 'The phone on the nightstand',
     contactTitle: "Let's talk?",
-    contactText: "If you have a project, an offer or just want to chat about product, code or design, drop me a line. I reply fast (right after feeding Luna).",
+    contactText: "If you have a project, an offer or just want to chat about product, code or design, drop me a line. I reply fast (right after feeding Aelin).",
     experienceShort: 'Experience',
     email: 'Email me',
     copyEmail: 'Copy email',
