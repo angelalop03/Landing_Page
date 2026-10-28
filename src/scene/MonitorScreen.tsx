@@ -15,9 +15,21 @@ interface Project {
   image?: string
   icon: string
   gradient: string
+  /** Live deployed URL — when set, the project is clickable and opens it directly. */
+  liveUrl?: string
 }
 
 const PROJECTS: Project[] = [
+  {
+    title: 'LudikaT',
+    description:
+      'Web para un negocio de cuidado infantil y animación de cumpleaños y comuniones: landing 3D con un bebé animado hecho solo con código, calendario de reservas con Supabase y panel privado para las cuidadoras.',
+    tech: 'React · Vite · React Three Fiber · Supabase · Vercel',
+    links: [{ label: 'Repositorio', url: 'https://github.com/angelalop03/LudikaT' }],
+    liveUrl: 'https://ludika-t.vercel.app/',
+    icon: '🍼',
+    gradient: 'linear-gradient(135deg, #ffb3c6, #a7d8f0)',
+  },
   {
     title: 'App Tripeas',
     description:
@@ -149,74 +161,123 @@ export default function MonitorScreen({ onClose }: MonitorScreenProps) {
               gap: '8px',
             }}
           >
-            {PROJECTS.map((project) => (
-              <div
-                key={project.title}
-                style={{
-                  background: '#fff',
-                  borderRadius: '8px',
-                  overflow: 'hidden',
-                  boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
-                  display: 'flex',
-                  gap: '10px',
-                  padding: '10px',
-                  flexShrink: 0,
-                }}
-              >
-                {project.image ? (
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    style={{ width: '62px', height: '62px', borderRadius: '6px', objectFit: 'cover', flexShrink: 0 }}
-                  />
-                ) : (
-                  <div
-                    style={{
-                      width: '62px',
-                      height: '62px',
-                      borderRadius: '6px',
-                      background: project.gradient,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '24px',
-                      flexShrink: 0,
-                    }}
-                  >
-                    {project.icon}
-                  </div>
-                )}
+            {PROJECTS.map((project) => {
+              const openLive = () => {
+                if (project.liveUrl) window.open(project.liveUrl, '_blank', 'noreferrer')
+              }
+              return (
+                <div
+                  key={project.title}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    openLive()
+                  }}
+                  title={project.liveUrl ? 'Abrir proyecto desplegado' : undefined}
+                  style={{
+                    background: '#fff',
+                    borderRadius: '8px',
+                    overflow: 'hidden',
+                    boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
+                    display: 'flex',
+                    gap: '10px',
+                    padding: '10px',
+                    flexShrink: 0,
+                    cursor: project.liveUrl ? 'pointer' : 'default',
+                    border: project.liveUrl ? '1px solid #bbf7d0' : '1px solid transparent',
+                  }}
+                >
+                  {project.image ? (
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      style={{ width: '62px', height: '62px', borderRadius: '6px', objectFit: 'cover', flexShrink: 0 }}
+                    />
+                  ) : (
+                    <div
+                      style={{
+                        width: '62px',
+                        height: '62px',
+                        borderRadius: '6px',
+                        background: project.gradient,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '24px',
+                        flexShrink: 0,
+                      }}
+                    >
+                      {project.icon}
+                    </div>
+                  )}
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', minWidth: 0 }}>
-                  <div style={{ fontSize: '13px', fontWeight: 700, color: '#222' }}>{project.title}</div>
-                  <div style={{ fontSize: '11px', lineHeight: 1.45, color: '#555' }}>{project.description}</div>
-                  <div style={{ fontSize: '9.5px', color: '#999', fontStyle: 'italic' }}>{project.tech}</div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                    {project.links.map((link) => (
-                      <a
-                        key={link.url}
-                        href={link.url}
-                        target="_blank"
-                        rel="noreferrer"
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '4px',
-                          fontSize: '10px',
-                          color: '#2563eb',
-                          textDecoration: 'none',
-                        }}
-                      >
-                        <span style={{ fontSize: '11px', flexShrink: 0 }}>💻</span>
-                        <span style={{ wordBreak: 'break-all' }}>
-                          {link.label}: {link.url.replace('https://github.com/', '')}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', minWidth: 0 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <div style={{ fontSize: '13px', fontWeight: 700, color: '#222' }}>{project.title}</div>
+                      {project.liveUrl && (
+                        <span
+                          style={{
+                            fontSize: '8.5px',
+                            fontWeight: 700,
+                            color: '#15803d',
+                            background: '#dcfce7',
+                            borderRadius: '999px',
+                            padding: '2px 6px',
+                          }}
+                        >
+                          ● en vivo
                         </span>
-                      </a>
-                    ))}
+                      )}
+                    </div>
+                    <div style={{ fontSize: '11px', lineHeight: 1.45, color: '#555' }}>{project.description}</div>
+                    <div style={{ fontSize: '9.5px', color: '#999', fontStyle: 'italic' }}>{project.tech}</div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                      {project.liveUrl && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '4px',
+                            fontSize: '10px',
+                            color: '#15803d',
+                            fontWeight: 700,
+                            textDecoration: 'none',
+                          }}
+                        >
+                          <span style={{ fontSize: '11px', flexShrink: 0 }}>🚀</span>
+                          <span>Ver proyecto en vivo</span>
+                        </a>
+                      )}
+                      {project.links.map((link) => (
+                        <a
+                          key={link.url}
+                          href={link.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '4px',
+                            fontSize: '10px',
+                            color: '#2563eb',
+                            textDecoration: 'none',
+                          }}
+                        >
+                          <span style={{ fontSize: '11px', flexShrink: 0 }}>💻</span>
+                          <span style={{ wordBreak: 'break-all' }}>
+                            {link.label}: {link.url.replace('https://github.com/', '')}
+                          </span>
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
 
           <div
