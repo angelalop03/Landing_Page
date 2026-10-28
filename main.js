@@ -333,7 +333,7 @@ const NIGHTSTAND = V(-1.5, 0, -4.45);
 const LAMP_POS = V(-1.75, 1.1, -4.6);
 const PHONE_POS = V(-1.2, 1.1, -4.2);
 const DESK = V(3.1, 0, -4.2);
-const LAPTOP_POS = V(2.65, 1.55, -4.3);
+const LAPTOP_POS = V(2.88, 1.55, -4.3);
 const MUG_POS = V(3.75, 1.55, -3.95);
 const BOARD = V(3.45, 3.4, -4.98);
 const SHELF = V(-4.65, 0, 1.4);
@@ -1119,8 +1119,8 @@ function buildDesk() {
     sphere(0.03, '#e8c070', 1.05, 1.17 - i * 0.46, 0.61, g);
   });
   // libros apilados
-  [['#b69cff', 0.7, 0.1], ['#ffd66b', 0.62, -0.2], ['#a9e5d9', 0.66, 0.15]].forEach(([c, w, r], i) => {
-    const b = box(w, 0.09, 0.48, c, -1.08, 1.6 + i * 0.09, -0.3, g, 0.015);
+  [['#b69cff', 0.56, 0.1], ['#ffd66b', 0.5, -0.12], ['#a9e5d9', 0.53, 0.08]].forEach(([c, w, r], i) => {
+    const b = box(w, 0.09, 0.44, c, -1.18, 1.6 + i * 0.09, -0.3, g, 0.015);
     b.rotation.y = r;
   });
   // cubilete con lápices
@@ -1671,7 +1671,7 @@ function init3D() {
   scene.add(winGroup);
 
   register('about', diary, V(-2.95, 1.55, -2.05), { pos: V(0.6, 4.1, 1.3), target: V(-3.0, 1.2, -2.1) }, '📔');
-  register('skills', laptop, V(2.6, 2.55, -4.35), { pos: V(3.3, 3.0, -0.8), target: V(2.65, 1.95, -4.3) }, '💻');
+  register('skills', laptop, V(2.85, 2.55, -4.35), { pos: V(3.5, 3.0, -0.8), target: V(2.88, 1.95, -4.3) }, '💻');
   register('experience', board, V(3.45, 4.42, -4.9), { pos: V(3.7, 3.55, 0.9), target: V(3.45, 3.35, -4.9) }, '📌');
   register('education', shelf, V(-4.6, 4.1, 1.4), { pos: V(0.4, 3.1, 2.9), target: V(-4.4, 1.9, 1.4) }, '📚');
   register('contact', phone, V(-1.15, 1.42, -4.15), { pos: V(0.5, 3.1, -1.4), target: V(-1.25, 1.15, -4.15) }, '📱');

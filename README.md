@@ -2,7 +2,26 @@
 
 Portfolio interactivo en 3D: una habitación de noche, flotando en un cielo estrellado, donde cada rincón guarda una parte de mi CV. Bilingüe (español / inglés).
 
+**👉 [Ver la web en vivo](https://portfolio-v2-rosy-eight.vercel.app/)**
+
+![La habitación de Ángela: vista general](docs/screenshots/habitacion.jpg)
+
 > Inspirado en la estructura de [El Muelle](https://github.com/ipiseradev/Portfolio-Ignacio): Three.js puro, sin framework de UI ni paso de build, y toda la geometría generada por código (sin modelos 3D externos).
+
+## Capturas
+
+| 📔 Diario · Sobre mí | 💻 Portátil · Stack |
+| --- | --- |
+| ![Diario sobre la cama con la gata Luna](docs/screenshots/diario.jpg) | ![Portátil con el stack técnico](docs/screenshots/portatil.jpg) |
+| **📌 Tablón · Experiencia** | **📚 Estantería · Formación** |
+| ![Tablón de corcho con la experiencia profesional](docs/screenshots/tablon.jpg) | ![Estantería con la formación](docs/screenshots/estanteria.jpg) |
+| **🌠 Pedir un deseo (versión en inglés)** | **⚡ Modo rápido, sin 3D** |
+| ![Estrella fugaz cruzando la ventana](docs/screenshots/deseo.jpg) | ![Modo rápido con todo el CV en una página](docs/screenshots/modo-rapido.jpg) |
+
+<p align="center">
+  <img src="docs/screenshots/movil.jpg" alt="Versión móvil con Luna como guía" width="300">
+  <br><em>Versión móvil, con Luna dando la bienvenida</em>
+</p>
 
 ## Qué hay en la habitación
 
@@ -36,6 +55,7 @@ y abrir <http://localhost:5180>.
 - `content.js`: **todo el contenido editable** (perfil, experiencia, formación, stack, deseos, textos ES/EN)
 - `style.css`: estilos de la interfaz
 - `cv.pdf`: CV descargable
+- `docs/screenshots/`: capturas para este README
 
 Para cambiar textos o datos, basta con editar `content.js`.
 
