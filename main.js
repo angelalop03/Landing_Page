@@ -5,7 +5,7 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { PROFILE, ABOUT, EXPERIENCE, EDUCATION, SKILLS, WISHES, GUIDE, UI } from './content.js';
+import { PROFILE, ABOUT, EXPERIENCE, EDUCATION, PROJECTS, SKILLS, WISHES, GUIDE, UI } from './content.js';
 
 
 const $ = (s) => document.querySelector(s);
@@ -78,6 +78,21 @@ function eduItem(e, i) {
     <div class="what"><strong>${esc(L(e.title))}</strong><span>${esc(e.place)}</span><em>${esc(L(e.period))}</em></div></div>`;
 }
 
+function projectCard(p) {
+  return `<article class="project-card">
+    <a class="project-shot" href="${esc(p.links[0].url)}" target="_blank" rel="noopener"><img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy"></a>
+    <div class="project-body">
+      <span class="pill">${esc(L(p.kind))}</span>
+      <h3>${esc(p.name)}</h3>
+      <p>${esc(L(p.summary))}</p>
+      <ul class="job-bullets">${L(p.highlights).map((h) => `<li>${esc(h)}</li>`).join('')}</ul>
+      ${tagList(p.tags)}
+      <div class="links">${p.links.map((l) => `<a class="btn small" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(L(l.label))} ↗</a>`).join('')}</div>
+    </div>
+  </article>`;
+}
+const githubButton = () => `<a class="btn pink" href="${esc(PROFILE.github)}" target="_blank" rel="noopener">🐙 ${t('seeAllGithub')} ↗</a>`;
+
 function stickerList() {
   return `<ul class="stickers">${SKILLS.map((s) => `<li class="sticker">
     <span class="sticker-badge" style="--c:${s.color}">${s.icon}</span>
@@ -103,6 +118,12 @@ const sections = {
     title: t('experienceTitle'),
     body: `<p class="lead">${t('experienceIntro')}</p>${EXPERIENCE.map(jobCard).join('')}
       <div class="row"><button type="button" class="btn pink" data-action="open:contact">${t('seeContact')}</button></div>`,
+  }),
+  projects: () => ({
+    eyebrow: t('projectsEyebrow'),
+    title: t('projectsTitle'),
+    body: `<p class="lead">${t('projectsIntro')}</p>${PROJECTS.map(projectCard).join('')}
+      <div class="row">${githubButton()}</div>`,
   }),
   education: () => ({
     eyebrow: t('educationEyebrow'),
@@ -218,6 +239,9 @@ function renderExpress() {
     </div>
     <h3 class="section">📌 ${t('experienceTitle')}</h3>
     <div class="ex-grid">${EXPERIENCE.map(jobCard).join('')}</div>
+    <h3 class="section">🖼️ ${t('projectsTitle')}</h3>
+    <div class="ex-grid">${PROJECTS.map(projectCard).join('')}</div>
+    <div class="row">${githubButton()}</div>
     <h3 class="section">💻 ${t('skillsTitle')}</h3>
     ${stickerList()}
     <h3 class="section">📚 ${t('educationTitle')}</h3>
@@ -301,7 +325,8 @@ try {
 let scene, camera, controls, HOME, composer, bloomPass;
 let hemi, moonLight, roomLight, lampLight, lampShadeMat, lampBulbMat, screenLight, neonMat, neonLight;
 let screenTex, screenCtx, phoneTex, phoneCtx, corkTex, corkCtx, diaryTex, signTex;
-let bulbs, beamMat, dust, starField, cat, catBody;
+let bulbs, beamMat, dust, starField, cat, catBody, doorGroup;
+const polaroids = [];
 const bulbData = [];
 const steam = [];
 const zzz = [];
@@ -386,7 +411,8 @@ function canvasTex(w, h, draw, repeat = false) {
 // texturas con texto: se vuelven a dibujar cuando cargan las fuentes
 function textTex(w, h, draw) {
   const tex = canvasTex(w, h, draw);
-  textureJobs.push(() => { draw(tex.userData.ctx, w, h); tex.needsUpdate = true; });
+  tex.userData.redraw = () => { draw(tex.userData.ctx, w, h); tex.needsUpdate = true; };
+  textureJobs.push(tex.userData.redraw);
   return tex;
 }
 function rrect(g, x, y, w, h, r) {
@@ -753,6 +779,7 @@ function buildRoom() {
 
   // puerta en la pared izquierda, con cartelito
   const door = new THREE.Group();
+  doorGroup = door;
   door.position.set(-4.97, 0, 3.7);
   scene.add(door);
   box(0.06, 4, 1.7, '#f7efe6', 0, 2, 0, door, 0.03);
@@ -1358,6 +1385,65 @@ function buildShelf() {
   return g;
 }
 
+/* ---------- polaroids de proyectos ---------- */
+function polaroidTex(caption, drawPhoto) {
+  return textTex(340, 270, (g, w, h) => {
+    g.fillStyle = '#fffdf8';
+    g.fillRect(0, 0, w, h);
+    drawPhoto(g, 16, 16, w - 32, 192);
+    g.fillStyle = '#2b2140';
+    g.textAlign = 'center';
+    g.font = `700 30px ${FONT}`;
+    g.fillText(caption, w / 2, 250);
+    g.textAlign = 'left';
+  });
+}
+
+function buildPolaroids() {
+  const g = new THREE.Group();
+  scene.add(g);
+  // cuelgan del tramo de guirnalda que va encima de la puerta
+  const garlandY = (z) => { const s = (z - 2.6) / 2.3; return 5.6 - 0.38 * 4 * s * (1 - s) - 0.03; };
+  const cards = PROJECTS.map((p) => {
+    const img = new Image();
+    const tex = polaroidTex(`${p.name} ♡`, (c, x, y, w, h) => {
+      if (img.complete && img.naturalWidth) c.drawImage(img, x, y, w, h);
+      else { c.fillStyle = '#f1eaff'; c.fillRect(x, y, w, h); }
+    });
+    img.onload = tex.userData.redraw;
+    img.src = p.image;
+    return tex;
+  });
+  cards.push(polaroidTex('@angelalop03', (c, x, y, w, h) => {
+    c.fillStyle = '#231a4a';
+    c.fillRect(x, y, w, h);
+    c.fillStyle = '#cdbbff';
+    const r2 = mulberry32(5);
+    for (let i = 0; i < 16; i++) { starPath(c, x + r2() * w, y + r2() * h, 2 + r2() * 4); c.fill(); }
+    c.fillStyle = '#ffffff';
+    c.textAlign = 'center';
+    c.font = `700 64px ${MONO}`;
+    c.fillText('</>', x + w / 2, y + 100);
+    c.font = `700 30px ${FONT}`;
+    c.fillStyle = '#ffc1d9';
+    c.fillText('GitHub', x + w / 2, y + 152);
+    c.textAlign = 'left';
+  }));
+  const zs = [4.55, 3.75, 2.95]; // de izquierda a derecha, vistas desde la habitación
+  cards.forEach((tex, i) => {
+    const z = zs[i];
+    const hang = new THREE.Group();
+    hang.position.set(-4.88, garlandY(z), z);
+    hang.userData.tilt = [0.06, -0.04, 0.07][i];
+    g.add(hang);
+    const photo = mesh(new THREE.PlaneGeometry(0.76, 0.6), new THREE.MeshStandardMaterial({ map: tex, roughness: 0.85 }), 0, -0.33, 0, hang);
+    photo.rotation.y = Math.PI / 2;
+    box(0.04, 0.12, 0.045, '#e8b98a', 0.015, -0.05, 0, hang, 0.01);
+    polaroids.push(hang);
+  });
+  return g;
+}
+
 /* ---------- interactivos ---------- */
 const hotspotsEl = $('#hotspots');
 function register(id, group, anchor, focus, icon, cls = '') {
@@ -1381,7 +1467,7 @@ function register(id, group, anchor, focus, icon, cls = '') {
   interactives[id] = { id, group, anchor, focus, el };
 }
 
-const LABELS = { about: 'hsAbout', skills: 'hsSkills', experience: 'hsExperience', education: 'hsEducation', contact: 'hsContact', window: 'hsWindow' };
+const LABELS = { about: 'hsAbout', skills: 'hsSkills', experience: 'hsExperience', education: 'hsEducation', projects: 'hsProjects', contact: 'hsContact', window: 'hsWindow', door: 'hsDoor' };
 function updateHotspotLabels() {
   for (const it of Object.values(interactives)) {
     if (!it.el) continue;
@@ -1422,6 +1508,7 @@ function activate(id) {
   if (id === 'lamp') toggleLamp();
   else if (id === 'window') makeWish();
   else if (id === 'cat') petCat();
+  else if (id === 'door') window.open(PROFILE.github, '_blank', 'noopener');
   else openSection(id);
 }
 function openSection(id) {
@@ -1581,6 +1668,9 @@ function tick(dt) {
     s.material.opacity = Math.sin(k * Math.PI) * 0.85;
   });
 
+  // las polaroids se balancean un poco
+  polaroids.forEach((p, i) => { p.rotation.x = p.userData.tilt + Math.sin(time * 1.1 + i * 1.7) * 0.025; });
+
   // vapor de la taza
   for (const s of steam) {
     const k = (time * 0.28 + s.userData.phase) % 1;
@@ -1677,6 +1767,8 @@ function init3D() {
   register('contact', phone, V(-1.15, 1.42, -4.15), { pos: V(0.5, 3.1, -1.4), target: V(-1.25, 1.15, -4.15) }, '📱');
   register('lamp', lamp, V(-1.85, 2.38, -4.6), null, '💡', 'toggle');
   register('window', winGroup, V(WIN_CENTER.x, WIN.y1 + 0.75, -4.9), { pos: V(3.2, 3.3, 3.8), target: V(WIN_CENTER.x, 3.1, -5) }, '🌠', 'wish');
+  register('projects', buildPolaroids(), V(-4.9, 5.6, 3.75), { pos: V(-0.6, 4.5, 4.0), target: V(-4.5, 4.75, 3.75) }, '🖼️');
+  register('door', doorGroup, V(-4.9, 2.45, 3.7), null, '🐙');
   register('cat', cat, null, null, null);
   updateHotspotLabels();
   drawScreen();

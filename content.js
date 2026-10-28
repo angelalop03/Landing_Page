@@ -102,6 +102,66 @@ export const EDUCATION = {
   ],
 };
 
+// Las polaroids colgadas de la guirnalda encima de la puerta: proyectos.
+export const PROJECTS = [
+  {
+    id: 'ludikat',
+    name: 'LudikaT',
+    image: 'assets/projects/ludikat.jpg',
+    kind: { es: 'Web para un negocio real', en: 'Website for a real business' },
+    summary: {
+      es: 'Web de cuidado infantil y animación de cumpleaños y comuniones, con landing 3D en tonos pastel y un sistema de reservas completo.',
+      en: 'Website for a childcare and birthday-party business, with a pastel 3D landing page and a complete booking system.',
+    },
+    highlights: {
+      es: [
+        'Bebé 3D interactivo hecho solo con código: respira, parpadea, sigue el ratón y salta al hacerle cosquillas.',
+        'Calendario de reservas conectado a Supabase, con aviso por email a las cuidadoras mediante Resend.',
+        'Panel de administración para ver, filtrar y borrar reservas, y versión sin 3D accesible.',
+      ],
+      en: [
+        'Interactive 3D baby built purely in code: it breathes, blinks, follows the mouse and jumps when tickled.',
+        'Booking calendar connected to Supabase, with email alerts to the caregivers via Resend.',
+        'Admin panel to view, filter and delete bookings, plus an accessible non-3D fallback.',
+      ],
+    },
+    tags: ['React 19', 'Vite', 'React Three Fiber', 'Three.js', 'Supabase', 'Resend', 'Vercel'],
+    links: [
+      { label: { es: 'Ver la web', en: 'Visit site' }, url: 'https://ludika-t.vercel.app/' },
+      { label: { es: 'Código', en: 'Code' }, url: 'https://github.com/angelalop03/LudikaT' },
+    ],
+  },
+  {
+    id: 'tripeas',
+    name: 'TripEAs',
+    image: 'assets/projects/tripeas.jpg',
+    kind: { es: 'Trabajo de Fin de Máster', en: "Master's thesis project" },
+    summary: {
+      es: 'App para organizar viajes en grupo sin caos: gastos compartidos, calendario de planes, listas, documentos sin conexión, álbum común y una ruleta para decidir.',
+      en: 'App to organize group trips without the chaos: shared expenses, plan calendar, lists, offline documents, a shared album and a roulette to decide.',
+    },
+    highlights: {
+      es: [
+        'App móvil para Android, iOS y web con React Native y Expo, en TypeScript.',
+        'API REST propia en Node.js y Express sobre Supabase/PostgreSQL, con tests en Jest.',
+        'Liquidación automática de gastos con el mínimo de transferencias, y landing desplegada con GitHub Actions.',
+      ],
+      en: [
+        'Mobile app for Android, iOS and web built with React Native and Expo, in TypeScript.',
+        'Custom REST API in Node.js and Express on Supabase/PostgreSQL, tested with Jest.',
+        'Automatic expense settlement with the fewest possible transfers, and a landing page deployed with GitHub Actions.',
+      ],
+    },
+    tags: ['React Native', 'Expo', 'TypeScript', 'Node.js', 'Express', 'Supabase', 'PostgreSQL', 'Jest'],
+    links: [
+      { label: { es: 'Ver la web', en: 'Visit site' }, url: 'https://angelalop03.github.io/TripEAs-Web/' },
+      { label: { es: 'Probar la app', en: 'Try the app' }, url: 'https://tripeas-app.expo.app/' },
+      { label: { es: 'Código app', en: 'App code' }, url: 'https://github.com/angelalop03/TripEAs-app' },
+      { label: { es: 'Código API', en: 'API code' }, url: 'https://github.com/angelalop03/TripEAs-backend' },
+    ],
+  },
+];
+
 // Cada grupo de habilidades es una pegatina del portátil.
 export const SKILLS = [
   {
@@ -161,6 +221,7 @@ export const GUIDE = {
       '¡Miau! Soy Luna, la gata de esta habitación (y la que manda aquí, que quede claro).',
       'Este es el cuarto de {first}: aquí programa, diseña y sueña de noche. Cada rincón guarda un trocito de su CV.',
       'En el diario está quién es, en el portátil su stack, en el tablón su experiencia, en la estantería su formación y en el móvil cómo contactarla.',
+      'Las polaroids de encima de la puerta son sus proyectos, y si abres la puerta llegas a su GitHub.',
       'Toca la lámpara para encenderla o la ventana para pedir un deseo. ¿Poco tiempo? Arriba tienes el «Modo rápido».',
     ],
     allWishes: ['¡Has pedido todos los deseos! El último depende de ti: escríbele a {first} desde el móvil de la mesita 💌'],
@@ -171,6 +232,7 @@ export const GUIDE = {
       "Meow! I'm Luna, the cat of this room (and the one in charge, just so you know).",
       "This is {first}'s room: she codes, designs and dreams here at night. Every corner holds a piece of her CV.",
       'The diary tells you who she is, the laptop her stack, the corkboard her experience, the bookshelf her education and the phone how to reach her.',
+      'The polaroids above the door are her projects, and opening the door takes you to her GitHub.',
       'Tap the lamp to switch it on or the window to make a wish. Short on time? Up top there\'s a "Quick mode".',
     ],
     allWishes: ["You've made every wish! The last one is up to you: message {first} from the phone on the nightstand 💌"],
@@ -204,6 +266,8 @@ export const UI = {
     hsLampOn: 'Encender lámpara',
     hsLampOff: 'Apagar lámpara',
     hsWindow: 'Pedir un deseo',
+    hsProjects: 'Mis proyectos',
+    hsDoor: 'GitHub ↗',
     meow: 'Miau 🐾',
     wish: '🌠 Deseo {n}/{total}: {text}',
     aboutEyebrow: 'Mi diario · Sobre mí',
@@ -215,6 +279,10 @@ export const UI = {
     experienceTitle: 'Experiencia profesional',
     experienceIntro: 'Las notas que tengo clavadas encima del escritorio: dónde he trabajado y qué he aprendido.',
     current: 'Actualidad',
+    projectsEyebrow: 'Polaroids de la guirnalda',
+    projectsTitle: 'Proyectos',
+    projectsIntro: 'Las fotos que tengo colgadas encima de la puerta: webs y apps que he diseñado y construido de principio a fin.',
+    seeAllGithub: 'Ver todos en GitHub',
     educationEyebrow: 'Estantería',
     educationTitle: 'Formación',
     educationIntro: 'Los libros, los apuntes y los diplomas que me han traído hasta aquí.',
@@ -262,6 +330,8 @@ export const UI = {
     hsLampOn: 'Switch lamp on',
     hsLampOff: 'Switch lamp off',
     hsWindow: 'Make a wish',
+    hsProjects: 'My projects',
+    hsDoor: 'GitHub ↗',
     meow: 'Meow 🐾',
     wish: '🌠 Wish {n}/{total}: {text}',
     aboutEyebrow: 'My diary · About me',
@@ -273,6 +343,10 @@ export const UI = {
     experienceTitle: 'Professional experience',
     experienceIntro: "The notes pinned above my desk: where I've worked and what I've learned.",
     current: 'Present',
+    projectsEyebrow: 'Polaroids on the fairy lights',
+    projectsTitle: 'Projects',
+    projectsIntro: "The photos clipped above my door: websites and apps I've designed and built end to end.",
+    seeAllGithub: 'See them all on GitHub',
     educationEyebrow: 'Bookshelf',
     educationTitle: 'Education',
     educationIntro: 'The books, notes and diplomas that brought me here.',

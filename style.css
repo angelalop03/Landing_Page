@@ -474,6 +474,25 @@ a { color: inherit; }
   font-size: 13px;
 }
 
+/* polaroids de proyectos */
+.project-card {
+  background: #fff;
+  border: 2.5px solid var(--ink);
+  border-radius: 16px;
+  box-shadow: 0 3px 0 var(--ink);
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+.project-shot { display: block; border-bottom: 2.5px solid var(--ink); background: #f1eaff; }
+.project-shot img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; transition: transform .3s ease; }
+.project-shot:hover img { transform: scale(1.03); }
+.project-body { padding: 14px 16px 16px; }
+.project-body h3 { margin: 8px 0 4px; font-family: var(--font-display); font-size: 22px; line-height: 1.2; }
+.project-body p { margin: 0 0 10px; }
+.project-body .job-bullets { margin-bottom: 12px; }
+.links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.ex-grid .project-card { margin: 0; }
+
 /* pegatinas del portátil */
 .stickers { display: grid; gap: 10px; padding: 0; margin: 14px 0 0; list-style: none; }
 .sticker {
