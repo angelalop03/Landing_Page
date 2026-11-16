@@ -132,6 +132,33 @@ export const PROJECTS = [
     ],
   },
   {
+    id: 'mochi',
+    name: 'Isla Mochi',
+    image: 'assets/projects/mochi.jpg',
+    kind: { es: 'App web de salud (PWA)', en: 'Health web app (PWA)' },
+    summary: {
+      es: 'Una guía del ciclo menstrual contada como las estaciones de una pequeña isla: cómo te puedes sentir en cada fase y qué te puede ayudar, con Mochi como compañero.',
+      en: 'A menstrual-cycle guide told as the seasons of a tiny island: how you may feel in each phase and what can help, with Mochi as your companion.',
+    },
+    highlights: {
+      es: [
+        'Mochi y su isla en 3D hechos solo con código: cambian con cada estación, respiran, parpadean y tienen modo noche.',
+        'IA en la nube con Groq desde el servidor: consejos a medida y chat, con respuestas validadas y cupos diarios gratuitos.',
+        'Supabase con Row Level Security comprobada con tests, PWA instalable con notificaciones push e importación desde Clue.',
+      ],
+      en: [
+        'Mochi and its 3D island built purely in code: they change with each season, breathe, blink and have a night mode.',
+        'Server-side cloud AI with Groq: personalized tips and chat, with validated answers and free daily quotas.',
+        'Supabase with Row Level Security verified by tests, an installable PWA with push notifications, and import from Clue.',
+      ],
+    },
+    tags: ['React 19', 'TypeScript', 'React Three Fiber', 'Supabase', 'Groq', 'PWA', 'Vitest', 'Vercel'],
+    links: [
+      { label: { es: 'Ver la web', en: 'Visit site' }, url: 'https://isla-mochi.vercel.app/' },
+      { label: { es: 'Código', en: 'Code' }, url: 'https://github.com/angelalop03/MochiTracker' },
+    ],
+  },
+  {
     id: 'tripeas',
     name: 'TripEAs',
     image: 'assets/projects/tripeas.jpg',
@@ -158,33 +185,6 @@ export const PROJECTS = [
       { label: { es: 'Probar la app', en: 'Try the app' }, url: 'https://tripeas-app.expo.app/' },
       { label: { es: 'Código app', en: 'App code' }, url: 'https://github.com/angelalop03/TripEAs-app' },
       { label: { es: 'Código API', en: 'API code' }, url: 'https://github.com/angelalop03/TripEAs-backend' },
-    ],
-  },
-  {
-    id: 'mochi',
-    name: 'Isla Mochi',
-    image: 'assets/projects/mochi.jpg',
-    kind: { es: 'App web de salud (PWA)', en: 'Health web app (PWA)' },
-    summary: {
-      es: 'Una guía del ciclo menstrual contada como las estaciones de una pequeña isla: cómo te puedes sentir en cada fase y qué te puede ayudar, con Mochi como compañero.',
-      en: 'A menstrual-cycle guide told as the seasons of a tiny island: how you may feel in each phase and what can help, with Mochi as your companion.',
-    },
-    highlights: {
-      es: [
-        'Mochi y su isla en 3D hechos solo con código: cambian con cada estación, respiran, parpadean y tienen modo noche.',
-        'IA en la nube con Groq desde el servidor: consejos a medida y chat, con respuestas validadas y cupos diarios gratuitos.',
-        'Supabase con Row Level Security comprobada con tests, PWA instalable con notificaciones push e importación desde Clue.',
-      ],
-      en: [
-        'Mochi and its 3D island built purely in code: they change with each season, breathe, blink and have a night mode.',
-        'Server-side cloud AI with Groq: personalized tips and chat, with validated answers and free daily quotas.',
-        'Supabase with Row Level Security verified by tests, an installable PWA with push notifications, and import from Clue.',
-      ],
-    },
-    tags: ['React 19', 'TypeScript', 'React Three Fiber', 'Supabase', 'Groq', 'PWA', 'Vitest', 'Vercel'],
-    links: [
-      { label: { es: 'Ver la web', en: 'Visit site' }, url: 'https://isla-mochi.vercel.app/' },
-      { label: { es: 'Código', en: 'Code' }, url: 'https://github.com/angelalop03/MochiTracker' },
     ],
   },
 ];
