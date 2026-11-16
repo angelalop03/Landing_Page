@@ -16,7 +16,7 @@ Portfolio interactivo en 3D: una habitación de noche, flotando en un cielo estr
 | **📌 Tablón · Experiencia** | **📚 Estantería · Formación** |
 | ![Tablón de corcho con la experiencia profesional](docs/screenshots/tablon.jpg) | ![Estantería con la formación](docs/screenshots/estanteria.jpg) |
 | **🖼️ Polaroids · Proyectos** | **🌠 Pedir un deseo (versión en inglés)** |
-| ![Polaroids de LudikaT y TripEAs colgadas de la guirnalda](docs/screenshots/proyectos.jpg) | ![Estrella fugaz cruzando la ventana](docs/screenshots/deseo.jpg) |
+| ![Polaroids de LudikaT, TripEAs e Isla Mochi colgadas de la guirnalda](docs/screenshots/proyectos.jpg) | ![Estrella fugaz cruzando la ventana](docs/screenshots/deseo.jpg) |
 | **⚡ Modo rápido, sin 3D** | **📱 Versión móvil, con Aelin dando la bienvenida** |
 | ![Modo rápido con todo el CV en una página](docs/screenshots/modo-rapido.jpg) | <p align="center"><img src="docs/screenshots/movil.jpg" alt="Versión móvil con Aelin como guía" width="220"></p> |
 
@@ -28,7 +28,7 @@ Portfolio interactivo en 3D: una habitación de noche, flotando en un cielo estr
 | 💻 Portátil del escritorio | Stack técnico (cada grupo es una pegatina) |
 | 📌 Tablón de corcho | Experiencia profesional (Airbus, Dedalus) |
 | 📚 Estantería | Formación, certificaciones e idiomas |
-| 🖼️ Polaroids en la guirnalda | Proyectos: [LudikaT](https://ludika-t.vercel.app/) y [TripEAs](https://angelalop03.github.io/TripEAs-Web/) |
+| 🖼️ Polaroids en la guirnalda | Proyectos: [LudikaT](https://ludika-t.vercel.app/), [TripEAs](https://angelalop03.github.io/TripEAs-Web/) e [Isla Mochi](https://isla-mochi.vercel.app/) |
 | 🚪 Puerta | Abre mi [GitHub](https://github.com/angelalop03) |
 | 📱 Móvil de la mesita | Contacto, LinkedIn, GitHub y CV |
 | 💡 Lámpara de la mesita | Se enciende y se apaga |

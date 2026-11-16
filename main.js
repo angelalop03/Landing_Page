@@ -1403,7 +1403,11 @@ function buildPolaroids() {
   const g = new THREE.Group();
   scene.add(g);
   // cuelgan del tramo de guirnalda que va encima de la puerta
-  const garlandY = (z) => { const s = (z - 2.6) / 2.3; return 5.6 - 0.38 * 4 * s * (1 - s) - 0.03; };
+  const garlandY = (z) => {
+    const [a, b] = z >= 2.6 ? [2.6, 4.9] : [0.1, 2.6];
+    const s = (z - a) / (b - a);
+    return 5.6 - 0.38 * 4 * s * (1 - s) - 0.03;
+  };
   const cards = PROJECTS.map((p) => {
     const img = new Image();
     const tex = polaroidTex(`${p.name} ♡`, (c, x, y, w, h) => {
@@ -1429,12 +1433,12 @@ function buildPolaroids() {
     c.fillText('GitHub', x + w / 2, y + 152);
     c.textAlign = 'left';
   }));
-  const zs = [4.55, 3.75, 2.95]; // de izquierda a derecha, vistas desde la habitación
+  const zs = [4.55, 3.75, 2.95, 2.15]; // de izquierda a derecha, vistas desde la habitación
   cards.forEach((tex, i) => {
     const z = zs[i];
     const hang = new THREE.Group();
     hang.position.set(-4.88, garlandY(z), z);
-    hang.userData.tilt = [0.06, -0.04, 0.07][i];
+    hang.userData.tilt = [0.06, -0.04, 0.07, -0.05][i];
     g.add(hang);
     const photo = mesh(new THREE.PlaneGeometry(0.76, 0.6), new THREE.MeshStandardMaterial({ map: tex, roughness: 0.85 }), 0, -0.33, 0, hang);
     photo.rotation.y = Math.PI / 2;
@@ -1767,7 +1771,7 @@ function init3D() {
   register('contact', phone, V(-1.15, 1.42, -4.15), { pos: V(0.5, 3.1, -1.4), target: V(-1.25, 1.15, -4.15) }, '📱');
   register('lamp', lamp, V(-1.85, 2.38, -4.6), null, '💡', 'toggle');
   register('window', winGroup, V(WIN_CENTER.x, WIN.y1 + 0.75, -4.9), { pos: V(3.2, 3.3, 3.8), target: V(WIN_CENTER.x, 3.1, -5) }, '🌠', 'wish');
-  register('projects', buildPolaroids(), V(-4.9, 5.6, 3.75), { pos: V(-0.6, 4.5, 4.0), target: V(-4.5, 4.75, 3.75) }, '🖼️');
+  register('projects', buildPolaroids(), V(-4.9, 5.6, 3.35), { pos: V(0.4, 4.5, 3.6), target: V(-4.5, 4.75, 3.35) }, '🖼️');
   register('door', doorGroup, V(-4.9, 2.45, 3.7), null, '🐙');
   register('cat', cat, null, null, null);
   updateHotspotLabels();
