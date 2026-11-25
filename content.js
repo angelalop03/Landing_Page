@@ -187,6 +187,33 @@ export const PROJECTS = [
       { label: { es: 'Código API', en: 'API code' }, url: 'https://github.com/angelalop03/TripEAs-backend' },
     ],
   },
+  {
+    id: 'bellas-heart',
+    name: "Bella's Heart",
+    image: 'assets/projects/bellas-heart.jpg',
+    kind: { es: 'Trabajo de Fin de Grado', en: "Bachelor's thesis project" },
+    summary: {
+      es: 'Novela visual jugable en el móvil sobre las relaciones de pareja y la violencia de género: eres Bella y tus decisiones cambian la historia. Ayuda a reconocer las señales de una relación tóxica y da a conocer los recursos de ayuda.',
+      en: 'A mobile-playable visual novel about relationships and gender violence: you are Bella and your choices change the story. It helps players recognize the signs of a toxic relationship and shows where to find help.',
+    },
+    highlights: {
+      es: [
+        'Historia ramificada con cuatro caminos: cada decisión suma malestar a Bella o tensión a la relación, y al final el historial marca las señales de alerta.',
+        'Botón «Ayuda 016» siempre visible y página de recursos con llamada directa al 016 y al 112.',
+        'Partidas en la nube con la lógica del juego en funciones SQL (Neon · PostgreSQL), sesiones seguras con bcrypt y CSRF, panel de administración y PWA instalable.',
+      ],
+      en: [
+        'Branching story with four paths: every choice adds to Bella’s distress or the relationship’s tension, and the final history highlights the warning signs.',
+        'An always-visible “Help 016” button and a resources page with direct calls to Spain’s 016 helpline and 112.',
+        'Cloud saves with the game logic in SQL functions (Neon · PostgreSQL), secure sessions with bcrypt and CSRF protection, an admin panel and an installable PWA.',
+      ],
+    },
+    tags: ['React 19', 'TypeScript', 'Vite', 'PostgreSQL', 'Neon', 'Vercel Functions', 'PWA'],
+    links: [
+      { label: { es: 'Jugar', en: 'Play' }, url: 'https://bellas-heart.vercel.app/' },
+      { label: { es: 'Código', en: 'Code' }, url: 'https://github.com/angelalop03/bellas-heart-web' },
+    ],
+  },
 ];
 
 // Cada grupo de habilidades es una pegatina del portátil.
